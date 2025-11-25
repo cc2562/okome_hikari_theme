@@ -304,6 +304,7 @@ const FormField = {
             availableItems,
             selectedItems,
             updateValue,
+            rgbaToHex,
             addItem,
             removeItem,
             addNewItem,
