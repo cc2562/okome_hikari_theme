@@ -281,3 +281,12 @@
     transform: translateY(0) scale(1);
     pointer-events: auto;
 }
+
+.prose img.owo-emoji,
+.comment_body img.owo-emoji {
+    display: inline-block !important;
+    vertical-align: text-bottom;
+    margin: 0 0.15em;
+    height: 2.5em;
+    width: auto;
+}

@@ -3765,9 +3765,6 @@ svg {
   .max-w-5xl {
     max-width: var(--container-5xl);
   }
-  .max-w-32 {
-    max-width: calc(var(--spacing) * 32);
-  }
   .max-w-full {
     max-width: 100%;
   }
@@ -3876,9 +3873,6 @@ svg {
   }
   .justify-center {
     justify-content: center;
-  }
-  .justify-end {
-    justify-content: flex-end;
   }
   .justify-start {
     justify-content: flex-start;
@@ -4256,6 +4250,18 @@ svg {
     @layer daisyui.l1.l2 {
       &, &:focus, &:focus-within {
         --input-color: var(--color-neutral);
+      }
+    }
+  }
+  .group-focus-within\:inline-block {
+    &:is(:where(.group):focus-within *) {
+      display: inline-block;
+    }
+  }
+  .group-hover\:inline-block {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        display: inline-block;
       }
     }
   }
@@ -4667,6 +4673,13 @@ svg {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+}
+.prose img.owo-emoji, .comment_body img.owo-emoji {
+  display: inline-block !important;
+  vertical-align: text-bottom;
+  margin: 0 0.15em;
+  height: 2.5em;
+  width: auto;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

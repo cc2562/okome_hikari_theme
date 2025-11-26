@@ -134,4 +134,29 @@ class GetComment
             self::handleError('评论分页导航失败', $e);
         }
     }
+
+    //评论表情处理
+    public static function CommentEmoji($commentStr)
+    {
+        $EmojiJson = __DIR__ . '/../../../assets/owo.json';
+        $json = @file_get_contents($EmojiJson);
+        if ($json === false) return $commentStr;
+        $data = json_decode($json, true);
+        if (!is_array($data)) return $commentStr;
+        foreach ($data as $category) {
+            if (!is_array($category)) continue;
+            if (isset($category['type']) && $category['type'] === 'image' && isset($category['container']) && is_array($category['container'])) {
+                foreach ($category['container'] as $item) {
+                    if (!is_array($item)) continue;
+                    $trigger = isset($item['input']) ? (string)$item['input'] : '';
+                    $icon = isset($item['icon']) ? (string)$item['icon'] : '';
+                    if ($trigger === '' || $icon === '') continue;
+                    $alt = isset($item['text']) ? (string)$item['text'] : '';
+                    $img = '<img src="' . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($alt, ENT_QUOTES, 'UTF-8') . '" class="owo-emoji">';
+                    $commentStr = str_replace($trigger, $img, $commentStr);
+                }
+            }
+        }
+        return $commentStr;
+    }
 }

@@ -26,7 +26,10 @@ function threadedComments($comments, $options)
                 <div class="comment_data">
                     <strong><?php $comments->author(); ?></strong>
                 </div>
-                <div class="comment_body"><?php $comments->content(); ?></div>
+                <div class="comment_body"><?php ob_start();
+                                            $comments->content();
+                                            $___c = ob_get_clean();
+                                            echo GetComment::CommentEmoji($___c); ?></div>
                 <p class="text-sm text-gray-500"><?php GetComment::FormatDate(); ?> <span class="comment-reply hidden group-hover:inline-block group-focus-within:inline-block"><?php $comments->reply('回复'); ?></span></p>
             </div>
         </div>
@@ -80,9 +83,21 @@ function threadedComments($comments, $options)
                             <input name="_" type="hidden" id="comment_" value="<?php echo Helper::security()->getToken(str_replace(array('?_pjax=%23wrap', '?_pjax=%23pjax-load', '&_pjax=%23wrap'), '', $this->request->getUrlPrefix() . $this->request->getRequestUri())); ?>" />
 
                             <div id="comments-textarea-wrap" class="w-full mt-4">
-                                <textarea id="comments-textarea" name="text" placeholder="内容" class="textarea-neutral textarea w-full"><?php $this->remember('text'); ?></textarea>
+                                <textarea id="comments-textarea" name="text" placeholder="内容" class="textarea-neutral textarea w-full OwO-textarea"><?php $this->remember('text'); ?></textarea>
 
                             </div>
+                            <div class="OwO">23121</div>
+                            <script data-swup-reload-script>
+                                var OwO_demo = new OwO({
+                                    logo: 'OωO表情',
+                                    container: document.getElementsByClassName('OwO')[0],
+                                    target: document.getElementsByClassName('OwO-textarea')[0],
+                                    api: "<?php get_assets('owo.json') ?>",
+                                    position: 'down',
+                                    width: '100%',
+                                    maxHeight: '250px'
+                                });
+                            </script>
                             <div class="flex flex-row gap-2 card mt-4 items-center justify-start">
                                 <input type="submit" value="发送" class="submit btn  btn-primary w-auto" id="comment-submit" />
                                 <?php if ($comments->cancelReply() != ""): ?>

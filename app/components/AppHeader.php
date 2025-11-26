@@ -10,6 +10,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <?php TTDF_Hook::do_action('load_head'); ?>
     <link rel="stylesheet" href="<?php get_assets('tailwindcss.css') ?>">
     <link rel="stylesheet" href="<?php get_assets('app.css') ?>">
+    <link rel="stylesheet" href="<?php get_assets('OwO.min.css') ?>">
     <style>
         :root {
             --root-bg: var(--color-base-200);
@@ -65,6 +66,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <script src="<?php get_assets('lazysizes.min.js') ?>" async=""></script>
     <script src="<?php get_assets('medium-zoom.min.js') ?>"></script>
     <link rel="stylesheet" href="<?php get_assets('APlayer.min.css') ?>">
+    <script src="<?php get_assets('OwO.min.js') ?>"></script>
     <script src="<?php get_assets('APlayer.min.js') ?>"></script>
     <style>
         .medium-zoom-overlay,
