@@ -6,6 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <div class="container mx-auto max-w-3xl px-4 py-6 text-sm text-gray-500 dark:text-gray-400">
         <p>© <?php echo date('Y'); ?> <?php get_site_name(); ?></p>
     </div>
+
 </footer>
 <div id="backToTopFab" class="fab fixed bottom-6 right-6 z-50 back-to-top-fab">
     <button id="backToTopTrigger" type="button" aria-label="回到顶部" class="btn btn-lg btn-circle btn-base bg-base-300">

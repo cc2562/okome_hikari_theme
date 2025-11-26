@@ -214,6 +214,34 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 }
             }
 
+            function initCommentReplyToggle() {
+                var list = document.getElementById('comment_list');
+                if (!list) return;
+                if (list.dataset.replyToggleBound === '1') return;
+                list.dataset.replyToggleBound = '1';
+
+                function hideAll() {
+                    list.querySelectorAll('.comment-reply').forEach(function(el) {
+                        el.classList.add('hidden');
+                    });
+                }
+
+                function activateFor(target) {
+                    var card = target.closest('#comment_list .card');
+                    if (!card) return;
+                    var btn = card.querySelector('.comment-reply');
+                    if (!btn) return;
+                    hideAll();
+                    btn.classList.remove('hidden');
+                }
+                list.addEventListener('pointerdown', function(e) {
+                    activateFor(e.target);
+                });
+                list.addEventListener('click', function(e) {
+                    activateFor(e.target);
+                });
+            }
+
 
 
 
@@ -248,13 +276,15 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                     highlightIfNeeded();
                     TypechoCommentUSE();
                     initLightbox();
+                    initCommentReplyToggle();
                     <?php Get::Options('pjax_Content', true); ?>
                 });
                 swup.hooks.on('content:replace', function() {
                     highlightIfNeeded();
                     TypechoCommentUSE();
-
-
+                    initLightbox();
+                    initCommentReplyToggle();
+                    <?php Get::Options('pjax_Content', true); ?>
                 });
 
             }
@@ -281,6 +311,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             TypechoCommentUSE();
             highlightIfNeeded();
             initLightboxOnReady();
+            initCommentReplyToggle();
 
         })();
     </script>
@@ -334,14 +365,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         <div class="card-body">
                             <div class="flex flex-row  w-full h-6 items-end space-x-2 mb-2">
                                 <h3 class="text-primary-content font-semibold text-2xl">分类</h3>
-                                <h5 class="text-sm">To discover the world</h5>
                             </div>
 
                             <?php $this->widget('Widget_Metas_Category_List')
                                 ->parse('<li><a href="{permalink}">{name}</a></li>'); ?>
-
                         </div>
                     </div>
+
                 </ul>
             </div>
         </div>

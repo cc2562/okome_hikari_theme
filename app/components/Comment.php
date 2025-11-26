@@ -22,16 +22,12 @@ function threadedComments($comments, $options)
     <div id="<?php $comments->theId(); ?>">
         <div class="flex flex-row <?php echo ($level > 0) ? 'gap-4' : 'gap-4' ?> items-start mb-2">
             <img class="mask mask-squircle sm:w-16 w-10" src="<?php echo TTDF_get_avatar_src($comments, 64); ?>" />
-            <div class="card <?php echo ($level > 0) ? 'bg-base-100' : 'bg-base-100 shadow-sm'; ?> <?php echo ($level > 1) ? 'p-4 sm:p-8' : 'p-4 sm:p-8'; ?> flex-1">
+            <div class="card <?php echo ($level > 0) ? 'bg-base-100' : 'bg-base-100 shadow-sm'; ?> <?php echo ($level > 1) ? 'p-4 sm:p-8' : 'p-4 sm:p-8'; ?> flex-1 group" tabindex="0">
                 <div class="comment_data">
                     <strong><?php $comments->author(); ?></strong>
                 </div>
                 <div class="comment_body"><?php $comments->content(); ?></div>
-                <p class="text-sm text-gray-500"><?php GetComment::FormatDate(); ?></p>
-                <div class="w-full items-end justify-end flex">
-                    <span class="comment-reply"><?php $comments->reply('回复'); ?></span>
-                </div>
-
+                <p class="text-sm text-gray-500"><?php GetComment::FormatDate(); ?> <span class="comment-reply hidden group-hover:inline-block group-focus-within:inline-block"><?php $comments->reply('回复'); ?></span></p>
             </div>
         </div>
         <?php if ($comments->children): ?>
@@ -57,6 +53,7 @@ function threadedComments($comments, $options)
                     <div id="comments-form" class="card bg-base-100 p-4 mb-8 md:p-8 shadow-sm">
                         <h3>新的评论</h3>
                         <form class="transition-form" data-swup-form method="post" action="<?php $this->commentUrl() ?>" id="comment_form">
+
                             <!-- 如果当前用户已经登录 -->
                             <?php if (GetUser::Login(false)): ?>
                                 <!-- 显示当前登录用户的用户名以及登出连接 -->
@@ -86,11 +83,13 @@ function threadedComments($comments, $options)
                                 <textarea id="comments-textarea" name="text" placeholder="内容" class="textarea-neutral textarea w-full"><?php $this->remember('text'); ?></textarea>
 
                             </div>
-                            <div class="flex flex-row gap-4 justify-center card bg-base-200  max-w-32 mt-4">
-                                <input type="submit" value="发送" class="submit btn btn-soft btn-primary w-full" id="comment-submit" />
-
+                            <div class="flex flex-row gap-2 card mt-4 items-center justify-start">
+                                <input type="submit" value="发送" class="submit btn  btn-primary w-auto" id="comment-submit" />
+                                <?php if ($comments->cancelReply() != ""): ?>
+                                    <span class="cancel-comment-reply text-sm text-gray-500 btn btn-soft"><?php $comments->cancelReply(); ?></span>
+                                <?php endif; ?>
                             </div>
-                            <span class="cancel-comment-reply text-sm text-gray-500"><?php $comments->cancelReply(); ?></span>
+
                         </form>
                     </div>
                 </div>
