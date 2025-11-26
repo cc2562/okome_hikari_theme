@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             <?php while (Get::Next()): ?>
                 <article class="w-full">
 
-                    <div class="card flex flex-col bg-base-100 w-full shadow-sm hover:scale-101 transition-transform duration-300 p-2">
+                    <div class="card flex flex-col bg-base-100 w-full shadow-sm hover:scale-101 active:scale-101 transition-transform duration-300 p-2">
                         <a href="<?php GetPost::Permalink(); ?>">
                             <?php if (GetPost::getFeaturedImage() !== 'none'): ?>
                                 <div class="card-image rounded-box  aspect-3/2  min-w-10 max-h-80 md:max-h-70 w-full">
