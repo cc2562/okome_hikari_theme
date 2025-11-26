@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             <article class="prose max-w-none">
                 <?php $featuredImage = get_fields('FeaturedImage'); ?>
                 <?php if ($featuredImage) : ?>
-                    <img data-src="<?php echo $featuredImage; ?>" src="<?php Get::Options('loadingImg', true); ?>" alt="特色图片" class="spotlight w-full h-64 md:h-120 object-cover blur-up lazyautosizes lazyload">
+                    <img data-src="<?php echo $featuredImage; ?>" src="<?php Get::Options('loadingImg', true); ?>" alt="特色图片" class="lightcover w-full h-64 md:h-120 object-cover blur-up lazyautosizes lazyload">
                 <?php endif; ?>
                 <h1 class="text-3xl font-bold mb-2"><?php GetPost::Title(); ?></h1>
                 <div class="text-sm text-gray-500 mb-6">

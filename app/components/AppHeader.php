@@ -63,9 +63,15 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
     <script src="https://unpkg.com/@swup/forms-plugin@3"></script>
     <script src="<?php get_assets('lazysizes.min.js') ?>" async=""></script>
-    <script src="<?php get_assets('spotlight.bundle.js') ?>"></script>
+    <script src="<?php get_assets('medium-zoom.min.js') ?>"></script>
     <link rel="stylesheet" href="<?php get_assets('APlayer.min.css') ?>">
     <script src="<?php get_assets('APlayer.min.js') ?>"></script>
+    <style>
+        .medium-zoom-overlay,
+        .medium-zoom-image--opened {
+            z-index: 999;
+        }
+    </style>
     <script data-swup-ignore-script>
         function TypechoCommentUSE() {
             window.TypechoComment = window.TypechoComment = {
@@ -184,6 +190,30 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 hljs.highlightAll();
             }
 
+            function initLightbox() {
+                var targets = document.querySelectorAll('.lightcover');
+                if (!targets || targets.length === 0) return;
+                if (typeof mediumZoom !== 'function') return;
+                try {
+                    if (window.__zoomInstance && typeof window.__zoomInstance.detach === 'function') {
+                        window.__zoomInstance.detach();
+                    }
+                } catch (e) {}
+                window.__zoomInstance = mediumZoom(targets, {
+                    background: 'rgba(0, 0, 0, 0.4)'
+                });
+            }
+
+            function initLightboxOnReady() {
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    initLightbox();
+                } else {
+                    document.addEventListener('DOMContentLoaded', initLightbox, {
+                        once: true
+                    });
+                }
+            }
+
 
 
 
@@ -217,12 +247,14 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 swup.hooks.on('page:view', function() {
                     highlightIfNeeded();
                     TypechoCommentUSE();
+                    initLightbox();
                     <?php Get::Options('pjax_Content', true); ?>
                 });
                 swup.hooks.on('content:replace', function() {
                     highlightIfNeeded();
                     TypechoCommentUSE();
-                    <?php Get::Options('pjax_Content', true); ?>
+
+
                 });
 
             }
@@ -248,6 +280,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
             TypechoCommentUSE();
             highlightIfNeeded();
+            initLightboxOnReady();
 
         })();
     </script>

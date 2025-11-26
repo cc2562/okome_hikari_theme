@@ -654,7 +654,7 @@ class GetPost extends Typecho_Widget
                     }
                     $img = preg_replace('/\bclass\s*=\s*\'([^\']*)\'/i', 'class="' . $newCls . '"', $img);
                 } else {
-                    $img = preg_replace('/<img\b/i', '<img class="lazyload blur-up spotlight"', $img);
+                    $img = preg_replace('/<img\b/i', '<img class="lazyload blur-up lightcover"', $img);
                 }
 
                 $img = preg_replace('/\/?>$/', ' src="' . htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8') . '" data-src="' . htmlspecialchars($origSrc, ENT_QUOTES, 'UTF-8') . '"$0', $img);
