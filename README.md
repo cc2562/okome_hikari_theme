@@ -1,7 +1,7 @@
 # 稻曦（okome hikari）
 
 ![稻曦（okome hikari）](screenshot.png)
-一个基于 TTDF 框架构建的现代化 Typecho 单栏主题，专注于简洁、流畅与可配置的体验。内置页面转场、动态配色系统、图片懒加载、代码高亮、评论增强与音乐播放器等功能，开箱即用，亦可按需扩展。
+一个基于 TTDF 框架构建的现代化 Typecho 主题，专注于简洁、流畅与可配置的体验。内置页面转场、动态配色系统、图片懒加载、代码高亮、评论增强与音乐播放器等功能，开箱即用，亦可按需扩展。
 
 ## 运行环境
 
@@ -13,7 +13,6 @@
 - 将主题目录放入 `usr/themes/okome_hikari`
 - 进入 Typecho 后台 → `外观` → 选择并启用“稻曦（okome hikari）”
 - 可选：安装并启用友链插件 `Links`
-
 ## 功能亮点
 
 - 动态配色系统：自定义主色/中性色/强调色等，自动适配浅色/深色
@@ -34,44 +33,6 @@
 - Meting API 地址：为 `APlayer` 提供曲库接口
 - PJAX 回调：在页面转场完成后执行的自定义脚本内容
 - 颜色设置：主色、次色、强调色、中性色，以及色调强度与全局圆角
-
-## 短代码
-主题提供了多种短代码可以使用
-### 提示
-
-```
-[notice]提示提示[/notice]
-[alert]警告提示[/alert]
-[error]错误提示[/error]
-```
-
-### b站视频
-
-`[bili]这里可以输入AV号或BV号[/bili]`
-
-### 本地音乐
-
-`[aplayer id="1" url="2" artist="3" pic="5"]这里是音乐标题[/aplayer]`
-- `id`：容器ID，确保唯一即可
-- `url`：音乐文件的 URL 地址。
-- `artist`：音乐文件的艺术家或作者。
-- `pic`：音乐文件的封面图片 URL 地址。
-
-### 在线音乐
-
-> 在线音乐使用MetingJS获取，你需要现在设置中配置API地址,可以在互联网上查找api或者自己部署：https://github.com/injahow/meting-api/
-
-#### 在线单曲
-
-`[meting_single id="1"]这里填写音乐ID（如网易云的单曲id）[/meting_single]`
-- `id`：容器ID，确保唯一即可
-
-#### 在线歌单
-
-`[meting_list id="2233"]歌单id（如网易云的歌单id）[/meting_list]`
-- `id`：容器ID，确保唯一即可
-
-
 
 ## 自定义字段（文章）
 
@@ -106,7 +67,6 @@ npm install
 - Tailwind CSS、daisyUI
 - Swup、highlight.js、lazysizes、APlayer
 - G主题（季悠然）
-- OWO.js
 
 
 ## 许可协议
