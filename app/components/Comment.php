@@ -29,7 +29,7 @@ function threadedComments($comments, $options)
                 <div class="comment_body"><?php ob_start();
                                             $comments->content();
                                             $___c = ob_get_clean();
-                                            echo GetComment::CommentEmoji($___c); ?></div>
+                                            echo OKOME::processCommentEmoji($___c); ?></div>
                 <p class="text-sm text-gray-500"><?php GetComment::FormatDate(); ?> <span class="comment-reply hidden group-hover:inline-block group-focus-within:inline-block"><?php $comments->reply('回复'); ?></span></p>
             </div>
         </div>
@@ -92,7 +92,7 @@ function threadedComments($comments, $options)
                                     logo: 'OωO表情',
                                     container: document.getElementsByClassName('OwO')[0],
                                     target: document.getElementsByClassName('OwO-textarea')[0],
-                                    api: "<?php get_assets('owo.json') ?>",
+                                    api: "<?php echo rtrim(get_site_url(false), '/') . '/okome-hikari-api/owo'; ?>",
                                     position: 'down',
                                     width: '100%',
                                     maxHeight: '250px'

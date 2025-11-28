@@ -5,3 +5,4 @@ logs
 .trae/
 .repomap/
 .virtualme/
+node_modules/

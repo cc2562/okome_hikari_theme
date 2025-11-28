@@ -57,12 +57,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <link rel="stylesheet" href="<?php get_assets('highlight.css') ?>">
         <script src="<?php get_assets('highlight.min.js') ?>"></script>
     <?php endif; ?>
-    <script src="https://unpkg.com/swup@4"></script>
-    <script src="https://unpkg.com/@swup/scripts-plugin@2"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.2/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/@swup/scroll-plugin@4"></script>
-    <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
-    <script src="https://unpkg.com/@swup/forms-plugin@3"></script>
+    <script src="<?php get_assets('Swup.umd.js') ?>"></script>
+    <script src="<?php get_assets('swup.script-plugins.js') ?>"></script>
+    <script defer src="<?php get_assets('alpinejs.cdn.min.js') ?>"></script>
+    <script src="<?php get_assets('swup.scroll-plugin.js') ?>"></script>
+    <script src="<?php get_assets('swup.progress-plugin.js') ?>"></script>
+    <script src="<?php get_assets('swup.forms-plugin.js') ?>"></script>
     <script src="<?php get_assets('lazysizes.min.js') ?>" async=""></script>
     <script src="<?php get_assets('medium-zoom.min.js') ?>"></script>
     <link rel="stylesheet" href="<?php get_assets('APlayer.min.css') ?>">

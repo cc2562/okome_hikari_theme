@@ -706,8 +706,13 @@ class Get
                 $url = rtrim((string)$baseUrl, '/') . '/' . ltrim((string)$file, '/');
             } else {
                 $assetsDir = config('app.assets.dir', 'assets/');
-                $themeUrl = GetTheme::Url(false, $assetsDir . $file);
-                $url = $themeUrl ?? '';
+                // 直接获取主题URL
+                $themeBaseUrl = Helper::options()->themeUrl;
+                // 移除所有路径的开头和结尾斜杠，然后统一拼接
+                $themeBaseUrl = rtrim((string)$themeBaseUrl, '/');
+                $assetsDir = trim((string)$assetsDir, '/');
+                $file = ltrim((string)$file, '/');
+                $url = $themeBaseUrl . '/' . $assetsDir . '/' . $file;
             }
 
             // 默认追加版本号
@@ -721,14 +726,13 @@ class Get
 
             if ($echo) {
                 echo $url;
+                return null;
             } else {
                 return $url;
             }
         } catch (Exception $e) {
             return self::handleError('获取资源URL失败', $e);
         }
-
-        return '';
     }
 
     /**

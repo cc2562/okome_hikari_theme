@@ -5,11 +5,10 @@
  * 当然也可以创建一个custom.css文件
  * 然后在app.css中引入
  * @import "./custom.css";
- npx @tailwindcss/cli -i ./assets/app.css -o ./assets/tailwindcss.css --watch
+ * npx @tailwindcss/cli -i ./assets/app.css -o ./assets/tailwindcss.css --watch
  */
 
-@import "./welcome.css";
-@import "tailwindcss";
+/* @import "tailwindcss"; */
 
 @plugin "daisyui";
 

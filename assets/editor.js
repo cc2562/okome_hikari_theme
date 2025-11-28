@@ -1,5 +1,5 @@
 (function ($) {
-    $(document).on('DOMContentLoaded', function () {
+    $(document).ready(function () {
         function openFormModal(title, fields, onSubmit) {
             var modal = document.getElementById('rice-editor-modal');
             if (!modal) {
@@ -93,18 +93,39 @@
             var start = textarea.selectionStart;
             var end = textarea.selectionEnd;
             if (start == null || end == null) return;
-            if (end <= start) return;
+
             var sel = textarea.value.substring(start, end);
-            var wrapped = (prefix || '') + sel + (suffix || '');
+            var wrapped;
+
+            // 如果没有选中文本，直接插入标签对
+            if (end <= start || sel.length === 0) {
+                wrapped = (prefix || '') + (suffix || '');
+            } else {
+                // 如果有选中文本，用标签包裹选中的文本
+                wrapped = (prefix || '') + sel + (suffix || '');
+            }
+
             if (typeof textarea.setRangeText === 'function') {
                 textarea.setRangeText(wrapped);
-                textarea.selectionStart = start + wrapped.length;
-                textarea.selectionEnd = textarea.selectionStart;
+                // 如果没有选中文本，将光标放在标签中间
+                if (end <= start || sel.length === 0) {
+                    textarea.selectionStart = start + (prefix || '').length;
+                    textarea.selectionEnd = textarea.selectionStart;
+                } else {
+                    textarea.selectionStart = start + wrapped.length;
+                    textarea.selectionEnd = textarea.selectionStart;
+                }
                 textarea.focus();
             } else {
                 textarea.value = textarea.value.slice(0, start) + wrapped + textarea.value.slice(end);
-                textarea.selectionStart = start + wrapped.length;
-                textarea.selectionEnd = textarea.selectionStart;
+                // 如果没有选中文本，将光标放在标签中间
+                if (end <= start || sel.length === 0) {
+                    textarea.selectionStart = start + (prefix || '').length;
+                    textarea.selectionEnd = textarea.selectionStart;
+                } else {
+                    textarea.selectionStart = start + wrapped.length;
+                    textarea.selectionEnd = textarea.selectionStart;
+                }
                 textarea.focus();
             }
         }
@@ -123,45 +144,64 @@
             });
             $('#wmd-button-row').append(el);
         }
-        var buttons = [
-            {
-                id: 'wmd-meting-button',
-                title: '插入在线音乐',
-                fields: [
-                    { id: 'musicId', label: '音乐ID', type: 'text', required: true },
-                    { id: 'containerId', label: '容器ID', type: 'text', required: true }
-                ],
-                build: function (v) { return `[meting_single id="${v.containerId}"]${v.musicId}[/meting_single]`; }
-            },
-            {
-                id: 'wmd-meting-list-button',
-                title: '歌单',
-                fields: [
-                    { id: 'listId', label: '歌单ID', type: 'text', required: true },
-                    { id: 'containerId', label: '容器ID', type: 'text', required: true }
-                ],
-                build: function (v) { return `[meting_list id="${v.containerId}"]${v.listId}[/meting_list]`; }
-            },
-            {
-                id: 'wmd-local-music-button',
-                title: '本地音乐',
-                fields: [
-                    { id: 'containerId', label: '容器ID', type: 'text', required: true },
-                    { id: 'musicUrl', label: '音乐URL', type: 'text', required: true },
-                    { id: 'musicArtist', label: '音乐作者', type: 'text', required: false },
-                    { id: 'musicTitle', label: '音乐标题', type: 'text', required: true },
-                    { id: 'musicCover', label: '音乐封面', type: 'text', required: false }
-                ],
-                build: function (v) { return `[aplayer id="${v.containerId}" url="${v.musicUrl}" artist="${v.musicArtist}" pic="${v.musicCover}"]${v.musicTitle}[/aplayer]`; }
-            },
-            {
-                id: 'wmd-notice-button',
-                title: '提示',
-                modal: false,
-                action: function () { wrapSelection('[notice]', '[/notice]'); }
-            },
-        ];
-        buttons.forEach(addButton);
+
+        // 等待编辑器加载完成
+        function initEditorButtons() {
+            var buttonRow = $('#wmd-button-row');
+            if (buttonRow.length === 0) {
+                // 如果按钮容器不存在，延迟重试
+                setTimeout(initEditorButtons, 100);
+                return;
+            }
+
+            // 如果按钮已经添加过，不再重复添加
+            if ($('#wmd-meting-button').length > 0) {
+                return;
+            }
+
+            var buttons = [
+                {
+                    id: 'wmd-meting-button',
+                    title: '插入在线音乐',
+                    fields: [
+                        { id: 'musicId', label: '音乐ID', type: 'text', required: true },
+                        { id: 'containerId', label: '容器ID', type: 'text', required: true }
+                    ],
+                    build: function (v) { return `[meting_single id="${v.containerId}"]${v.musicId}[/meting_single]`; }
+                },
+                {
+                    id: 'wmd-meting-list-button',
+                    title: '歌单',
+                    fields: [
+                        { id: 'listId', label: '歌单ID', type: 'text', required: true },
+                        { id: 'containerId', label: '容器ID', type: 'text', required: true }
+                    ],
+                    build: function (v) { return `[meting_list id="${v.containerId}"]${v.listId}[/meting_list]`; }
+                },
+                {
+                    id: 'wmd-local-music-button',
+                    title: '本地音乐',
+                    fields: [
+                        { id: 'containerId', label: '容器ID', type: 'text', required: true },
+                        { id: 'musicUrl', label: '音乐URL', type: 'text', required: true },
+                        { id: 'musicArtist', label: '音乐作者', type: 'text', required: false },
+                        { id: 'musicTitle', label: '音乐标题', type: 'text', required: true },
+                        { id: 'musicCover', label: '音乐封面', type: 'text', required: false }
+                    ],
+                    build: function (v) { return `[aplayer id="${v.containerId}" url="${v.musicUrl}" artist="${v.musicArtist}" pic="${v.musicCover}"]${v.musicTitle}[/aplayer]`; }
+                },
+                {
+                    id: 'wmd-notice-button',
+                    title: '提示',
+                    modal: false,
+                    action: function () { wrapSelection('[notice]', '[/notice]'); }
+                },
+            ];
+            buttons.forEach(addButton);
+        }
+
+        // 初始化按钮
+        initEditorButtons();
     });
 
 })(jQuery);
