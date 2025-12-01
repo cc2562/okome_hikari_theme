@@ -4,7 +4,7 @@
  * okome hikari稻曦主题
  * @package okome hikari
  * @author CC米饭
- * @version 1.0.3
+ * @version 1.0.4
  * @link https://github.com/cc2562/okome_hikari_theme
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
