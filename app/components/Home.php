@@ -16,7 +16,16 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <?php endif; ?>
                             <div class="card-body">
                                 <a class=" text-xl card-title" href="<?php GetPost::Permalink(); ?>"><?php GetPost::Title(); ?></a>
-                                <p><?php GetPost::Excerpt(150, true); ?></p>
+                                <?php $aiSummary = get_fields('AISummary'); ?>
+                                <?php if ($aiSummary) : ?>
+                                    <p class="flex flex-row items-center  gap-2">
+                                        <span class="badge"><?php Get::Options('ai_show_badge', true); ?></span>
+                                    <p><?php echo GetPost::applyLazyloadToImages($aiSummary); ?></p>
+                                    </p>
+                                <?php else: ?>
+                                    <p><?php GetPost::Excerpt(150, true); ?></p>
+                                <?php endif; ?>
+
                             </div>
                         </a>
                     </div>
