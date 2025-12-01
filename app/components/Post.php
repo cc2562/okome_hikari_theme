@@ -22,7 +22,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                     <?php if ($aiSummary) : ?>
                         <div class="bg-base-200 card p-4  mb-2 shadow-sm">
                             <p class="flex flex-row items-center  gap-2">
-                                <span class="badge badge-xs badge"><?php Get::Options('ai_show_badge', true); ?></span>
+                                <span class="badge"><?php Get::Options('ai_show_badge', true); ?></span>
                                 <title class="card-title">摘要</title>
                             </p>
                             <div class="bg-base-100 p-4 mt-2 card md:p-8">

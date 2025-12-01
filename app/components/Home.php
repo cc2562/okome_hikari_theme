@@ -15,7 +15,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 </div>
                             <?php endif; ?>
                             <div class="card-body">
-                                <a class=" text-secondary-content text-xl card-title" href="<?php GetPost::Permalink(); ?>"><?php GetPost::Title(); ?></a>
+                                <a class=" text-xl card-title" href="<?php GetPost::Permalink(); ?>"><?php GetPost::Title(); ?></a>
                                 <p><?php GetPost::Excerpt(150, true); ?></p>
                             </div>
                         </a>
