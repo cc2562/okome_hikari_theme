@@ -2,7 +2,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 ?>
 </div>
-<footer class="border-t">
+<footer>
     <div class="container mx-auto max-w-3xl px-4 py-6 text-sm text-gray-500 dark:text-gray-400">
         <p>© <?php echo date('Y'); ?> <?php get_site_name(); ?></p>
     </div>
