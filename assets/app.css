@@ -92,10 +92,34 @@
     color: var(--color-primary);
     text-decoration: none;
     text-underline-offset: 2px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.prose a::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -4px;
+    bottom: -4px;
+    left: -7px;
+    right: -7px;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-box);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .prose a:hover {
-    opacity: 0.85;
+    color: var(--color-primary-content);
+    opacity: 1;
+}
+
+.prose a:hover::before {
+    transform: scale(1);
+    opacity: 1;
 }
 
 .prose img {
