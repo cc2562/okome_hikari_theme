@@ -5,6 +5,7 @@ require_once __DIR__ . '/shortcode.lib.php';
 require_once __DIR__ . '/ai.php';
 require_once __DIR__ . '/shortcode.php';
 
+
 // Register AI Hooks
 // Removed automatic generation as per request. Now using manual button.
 
@@ -63,5 +64,25 @@ class OKOME
         }
 
         return $commentStr;
+    }
+}
+
+
+
+// 自定义文章编辑器按钮
+Typecho_Plugin::factory('admin/write-post.php')->bottom = array('Editor', 'edit');
+Typecho_Plugin::factory('admin/write-page.php')->bottom = array('Editor', 'edit');
+class Editor
+{
+    public static function edit()
+    {
+        // Pass REST API Route configuration to JS
+        $apiRoute = defined('__TTDF_RESTAPI_ROUTE__') ? __TTDF_RESTAPI_ROUTE__ : 'ty-json';
+        $securityToken = \Typecho\Widget::widget('Widget_Security')->getToken('ai-summary-generate');
+        echo '<script>window.TTDF_RESTAPI_ROUTE = "' . $apiRoute . '"; window.TTDF_SECURITY_TOKEN = "' . $securityToken . '";</script>';
+?>
+        <script src="<?php get_assets('editor.js') ?>"></script>
+        <script src="<?php get_assets('js/ai-admin.js') ?>"></script>
+<?php
     }
 }
