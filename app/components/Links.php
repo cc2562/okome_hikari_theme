@@ -16,7 +16,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 				<a target="_blank" href="{url}" class="link-wrap block">
 					<div class="card card-side bg-base-200 p-4 flex flex-row items-center gap-4 m-2 w-auto transition  duration-300 ease-in-out hover:scale-110 active:scale-110 active:bg-primary hover:bg-primary"> 
 						<figure>
-                        <img class="mask mask-squircle w-20 h-20 hover:animate-spin object-cover" src="{image}" alt="{name}"/>
+                        <img class="mask mask-squircle w-18 h-18 hover:animate-spin object-cover" src="{image}" alt="{name}"/>
                         </figure>
 						<div class="flex flex-col">
 							<p class="text-lg font-bold text-base-content">{name}</p>

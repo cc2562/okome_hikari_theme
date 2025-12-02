@@ -6,7 +6,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <?php if (Get::Total() > 0): ?>
             <?php while (Get::Next()): ?>
                 <article class="w-full">
-
                     <div class="card flex flex-col bg-base-100 w-full shadow-sm hover:scale-101 active:scale-101 transition-transform duration-300 p-2">
                         <a href="<?php GetPost::Permalink(); ?>">
                             <?php if (GetPost::getFeaturedImage() !== 'none'): ?>
@@ -16,11 +15,20 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <?php endif; ?>
                             <div class="card-body">
                                 <a class=" text-xl card-title" href="<?php GetPost::Permalink(); ?>"><?php GetPost::Title(); ?></a>
-                                <p><?php GetPost::Excerpt(150, true); ?></p>
+                                <?php $aiSummary = get_fields('AISummary'); ?>
+                                <?php if ($aiSummary) : ?>
+                                    <p class="flex flex-row items-center  gap-2">
+
+                                    <p><?php echo GetPost::applyLazyloadToImages($aiSummary); ?></p>
+                                    <span class="badge"><?php Get::Options('ai_show_badge', true); ?> AI摘要</span>
+                                    </p>
+                                <?php else: ?>
+                                    <p><?php GetPost::Excerpt(150, true); ?></p>
+                                <?php endif; ?>
+
                             </div>
                         </a>
                     </div>
-
                 </article>
             <?php endwhile; ?>
             <?php

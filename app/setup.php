@@ -136,6 +136,49 @@ return [
             ],
         ]
     ],
+    'Post-Options' => [
+        'title' => '文章设置',
+        'fields' => [
+            [
+                'type' => 'Radio',
+                'name' => 'enablePostInfo',
+                'value' => '1',
+                'label' => '显示文章信息框',
+                'description' => '是否在文章底部显示版权、作者等信息框',
+                'layout' => 'horizontal',
+                'options' => [
+                    '1' => '开启',
+                    '0' => '关闭'
+                ]
+            ],
+            [
+                'type' => 'Radio',
+                'name' => 'enableCCLogo',
+                'value' => '1',
+                'label' => '显示CC许可协议logo',
+                'description' => '是否在文章底部显示CC许可协议logo',
+                'layout' => 'horizontal',
+                'options' => [
+                    '1' => '开启',
+                    '0' => '关闭'
+                ]
+            ],
+            [
+                'type' => 'Text',
+                'name' => 'licenseName',
+                'value' => 'CC BY-NC-SA 4.0',
+                'label' => '许可协议名称',
+                'description' => '文章信息框中显示的许可协议名称'
+            ],
+            [
+                'type' => 'Text',
+                'name' => 'licenseLink',
+                'value' => 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+                'label' => '许可协议链接',
+                'description' => '许可协议的跳转链接'
+            ]
+        ]
+    ],
     'Other-Options' => [
         'title' => '其他设置',
         'fields' => [
