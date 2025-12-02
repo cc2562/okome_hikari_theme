@@ -37,9 +37,9 @@ function shortcode_error($atts, $content = '')
 function shortcode_bili($atts, $content = '')
 {
   if (preg_match('/[a-zA-Z]/', $content)) {
-    return '<iframe class="bilibili w-full min-h-60 md:min-h-120 rounded-box" src="//player.bilibili.com/player.html?bvid=' . $content . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>';
+    return '<iframe class="bilibili w-full min-h-60 md:min-h-120 rounded-box" src="//www.bilibili.com/blackboard/html5mobileplayer.html?bvid=' . $content . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>';
   } else {
-    return '<iframe class="bilibili w-full min-h-60 md:min-h-120 rounded-box" src="//player.bilibili.com/player.html?aid=' . $content . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>';
+    return '<iframe class="bilibili w-full min-h-60 md:min-h-120 rounded-box" src="//www.bilibili.com/blackboard/html5mobileplayer.html?aid=' . $content . '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>';
   }
 }
 
