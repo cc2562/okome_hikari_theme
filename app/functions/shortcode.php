@@ -189,3 +189,134 @@ function shortcode_aplayer_meting_list($atts, $content = '')
 
 add_shortcode('meting_single', 'shortcode_aplayer_meting_single');
 add_shortcode('meting_list', 'shortcode_aplayer_meting_list');
+
+//折叠框
+function shortcode_collapse($atts, $content = '')
+{
+  $args = shortcode_atts(array(
+    'title' => ''
+  ), $atts);
+  $uid = uniqid();
+  return "<div tabindex='" . $uid . "' class='collapse collapse-arrow bg-base-100 border-base-300 border'>
+                    <div class='collapse-title font-semibold'>" . $args['title'] . "</div>
+                    <div class='collapse-content text-sm'>
+                        " . $content . "
+                    </div>
+                </div>
+  ";
+}
+add_shortcode('collapse', 'shortcode_collapse');
+
+//相册
+function shortcode_photos($atts, $content = '')
+{
+  // 清理内容中的HTML标签，防止自动分段干扰
+  $content = strip_tags($content);
+  $content = trim($content);
+
+  if (empty($content)) return '';
+
+  $loadingImg = Get::Options('loadingImg', false);
+
+  // 分割照片
+  $photos_raw = explode('###', $content);
+  $uid = uniqid('photos-');
+  // 初始输出一个普通容器，JS 将接管布局
+  // 初始设为 invisible 以避免布局闪烁，或者就让它默认堆叠
+  $html = '<div id="' . $uid . '" class="photos-gallery w-full">';
+
+  foreach ($photos_raw as $photo_raw) {
+    $photo_raw = trim($photo_raw);
+    if (empty($photo_raw)) continue;
+
+    // 分割描述和URL
+    $parts = explode(',', $photo_raw);
+
+    // 确保至少有描述和URL（或者容错）
+    if (count($parts) < 2) {
+      // 尝试容错：如果没有逗号，整体作为URL，描述为空
+      if (count($parts) == 1 && !empty($parts[0])) {
+        $url = trim($parts[0]);
+        $desc = '';
+      } else {
+        continue;
+      }
+    } else {
+      // 假设最后一部分是URL，前面是描述
+      $url = trim(array_pop($parts));
+      $desc = trim(implode(',', $parts));
+    }
+
+    // 生成HTML
+    $html .= '<div class="photo-item overflow-hidden rounded-box relative w-full h-auto group">';
+    $html .= '<img data-src="' . $url . '" src="' . $loadingImg . '" alt="' . $desc . '" title="' . $desc . '" class="lightcover m-0 lazyload blur-up cursor-zoom-in" style="margin: auto;" />';
+    if (!empty($desc)) {
+      $html .= '<div class="photo-desc absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 text-center backdrop-blur-sm">' . $desc . '</div>';
+    }
+    $html .= '</div>';
+  }
+  $html .= '</div>';
+
+  // 添加 JS 脚本进行 Flex Column 布局
+  $html .= "<script data-swup-reload-script>
+  (function() {
+      var container = document.getElementById('$uid');
+      if (!container) return;
+      
+      var lastCols = 0;
+      
+      function updateLayout() {
+          var width = window.innerWidth;
+          var cols = width >= 768 ? 4 : 2; // 桌面4列，移动2列
+          
+          if (cols === lastCols) return;
+          lastCols = cols;
+          
+          // 获取所有 photo-item
+          // 注意：如果已经分栏过，items 可能分散在子 div 中，所以要用 querySelectorAll 从 container 及其子元素中找
+          var items = Array.from(container.getElementsByClassName('photo-item'));
+          if (items.length === 0) return;
+          
+          // 确保按原始顺序排序
+          if (!items[0].hasAttribute('data-index')) {
+              items.forEach((item, index) => item.setAttribute('data-index', index));
+          }
+          items.sort((a, b) => parseInt(a.getAttribute('data-index')) - parseInt(b.getAttribute('data-index')));
+          
+          // 清空容器
+          container.innerHTML = '';
+          
+          // 创建列容器
+          var columns = [];
+          for(var i=0; i<cols; i++) {
+              var col = document.createElement('div');
+              col.className = 'flex flex-col gap-2 flex-1 min-w-0'; // flex-1 均分宽度，gap-2 垂直间距
+              columns.push(col);
+          }
+          
+          // 分发 items 到列容器
+          items.forEach((item, index) => {
+              columns[index % cols].appendChild(item);
+          });
+          
+          // 将列容器添加到主容器
+          container.className = 'photos-gallery flex flex-row gap-2 items-start w-full';
+          columns.forEach(col => container.appendChild(col));
+      }
+      
+      // 初始执行
+      updateLayout();
+      
+      // 监听 resize
+      var timeout;
+      window.addEventListener('resize', function() {
+          clearTimeout(timeout);
+          timeout = setTimeout(updateLayout, 100);
+      });
+  })();
+  </script>";
+
+  return $html;
+}
+
+add_shortcode('photos', 'shortcode_photos');
