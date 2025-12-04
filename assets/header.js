@@ -217,6 +217,7 @@
         var supportsSmooth = 'scrollBehavior' in document.documentElement.style;
         if (supportsSmooth) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            bindTopResetAfterScroll();
             return;
         }
         var duration = 300;
@@ -230,7 +231,31 @@
             if (progress < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
+        bindTopResetAfterScroll();
     }
+    function scheduleSwapTo(text) {
+        var el = getTitleEl();
+        if (!el) return;
+        if (window.__headerSwapTarget === text) return;
+        window.__headerSwapTarget = text;
+        if (window.__headerSwapTimer) {
+            clearTimeout(window.__headerSwapTimer);
+            window.__headerSwapTimer = null;
+        }
+        el.classList.add('is-swapping');
+        window.__headerSwapTimer = setTimeout(function () {
+            el.textContent = text;
+            el.classList.remove('is-swapping');
+            updateTitleOverflowMask();
+        }, 160);
+    }
+    function swapTitleTo(text) {
+        scheduleSwapTo(text);
+    }
+    function getTitleEl() { return document.querySelector('header .header-title-text'); }
+    function getSiteTitleFromEl(el) { return (el && el.dataset && el.dataset.siteTitle ? el.dataset.siteTitle : el ? el.getAttribute('data-site-title') : '') || (el ? el.textContent.trim() : ''); }
+    function resetTitleToSiteIfTop() { var el = getTitleEl(); if (!el) return; var y = window.scrollY || document.documentElement.scrollTop || 0; if (y <= 0) { window.__headerHoverActive = false; swapTitleTo(getSiteTitleFromEl(el)); } }
+    function bindTopResetAfterScroll() { function handler() { resetTitleToSiteIfTop(); var y = window.scrollY || document.documentElement.scrollTop || 0; if (y <= 0) { window.removeEventListener('scroll', handler); } } window.addEventListener('scroll', handler, { passive: true }); }
     function initHeaderHoverTitle() {
         var container = document.querySelector('header .header-glass');
         var titleEl = document.querySelector('header .header-title-text');
@@ -244,14 +269,7 @@
             var showPost = isPostView() && y > 50 && postTitle;
             return showPost ? postTitle : siteTitle;
         }
-        function swapText(text) {
-            titleEl.classList.add('is-swapping');
-            setTimeout(function () {
-                titleEl.textContent = text;
-                titleEl.classList.remove('is-swapping');
-                updateTitleOverflowMask();
-            }, 160);
-        }
+        function swapText(text) { scheduleSwapTo(text); }
         container.addEventListener('pointerenter', function () {
             var y = window.scrollY || document.documentElement.scrollTop || 0;
             if (y > 0) {
@@ -301,17 +319,7 @@
         updateTitleOverflowMask();
         var lastY = window.scrollY;
         var swapping = false;
-        function swapTo(text) {
-            if (swapping) return;
-            swapping = true;
-            titleEl.classList.add('is-swapping');
-            setTimeout(function () {
-                titleEl.textContent = text;
-                titleEl.classList.remove('is-swapping');
-                swapping = false;
-                updateTitleOverflowMask();
-            }, 160);
-        }
+        function swapTo(text) { scheduleSwapTo(text); }
         function onScroll() {
             var y = window.scrollY;
             var down = y > lastY;
