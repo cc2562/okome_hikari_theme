@@ -52,7 +52,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </label>
-                        <a href="<?php get_site_url(); ?>" class="text-lg sm:text-xl font-semibold tracking-tight"><?php get_site_name(); ?></a>
+                        <a href="<?php get_site_url(); ?>" class="text-lg sm:text-xl font-semibold tracking-tight"><span class="header-title-text" data-site-title="<?php get_site_name(); ?>"><?php get_site_name(); ?></span></a>
                     </div>
                 </header>
             </div>

@@ -53,3 +53,13 @@ html.is-changing #swup-loader {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
+
+.header-title-text {
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    display: inline-block;
+}
+
+.header-title-text.is-swapping {
+    opacity: 0;
+    transform: translateY(0.2em);
+}
