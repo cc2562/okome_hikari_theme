@@ -53,6 +53,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             </svg>
                         </label>
                         <a href="<?php get_site_url(); ?>" class="text-lg sm:text-xl font-semibold tracking-tight"><span class="header-title-text" data-site-title="<?php get_site_name(); ?>"><?php get_site_name(); ?></span></a>
+                        <div class="header-progress">
+                            <div class="header-progress__bar"></div>
+                        </div>
                     </div>
                 </header>
             </div>
