@@ -104,11 +104,15 @@ html.is-changing #swup-loader {
     transform: translateY(0.2em);
 }
 
-.header-glass a {
+.header-title-btn {
     flex: 1 1 auto;
     min-width: 0;
     display: inline-flex;
     align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 .header-title-text.is-overflowing {

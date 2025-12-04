@@ -46,13 +46,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content flex flex-col items-stretch justify-start">
                 <header class="fixed top-4 sm:top-6 inset-x-0 z-30 mx-2">
-                    <div class="container shadow-sm mx-auto max-w-5xl px-4 py-4 flex items-center justify-start space-x-4 bg-base-100 rounded-box backdrop-filter header-glass">
+                    <div class="container shadow-sm mx-auto max-w-5xl px-4 py-4 flex items-center justify-start space-x-4 bg-base-100 rounded-box backdrop-filter header-glass" data-home-url="<?php get_site_url(); ?>">
                         <label for="my-drawer-3" class="btn drawer-button">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </label>
-                        <a href="<?php get_site_url(); ?>" class="text-lg sm:text-xl font-semibold tracking-tight"><span class="header-title-text" data-site-title="<?php get_site_name(); ?>"><?php get_site_name(); ?></span></a>
+                        <button type="button" class="header-title-btn text-lg sm:text-xl font-semibold tracking-tight"><span class="header-title-text" data-site-title="<?php get_site_name(); ?>"><?php get_site_name(); ?></span></button>
                         <div class="header-progress">
                             <div class="header-progress__bar"></div>
                         </div>
