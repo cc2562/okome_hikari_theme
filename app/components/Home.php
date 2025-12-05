@@ -1,5 +1,6 @@
 <?php
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+if (!defined('__TYPECHO_ROOT_DIR__'))
+    exit;
 ?>
 <main>
     <div class="container mx-auto max-w-5xl px-4 flex flex-col gap-6">
@@ -23,7 +24,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 <?php if ($aiSummary): ?>
                                     <p class="flex flex-col items-start  gap-2">
                                         <?php echo mb_substr($aiSummary, 0, 100, 'UTF-8'); ?>...
-                                    <span class="badge"><?php Get::Options('ai_show_badge', true); ?> AI摘要</span>
+                                        <span class="badge"><?php Get::Options('ai_show_badge', true); ?> AI摘要</span>
                                     </p>
                                 <?php else: ?>
                                     <p><?php GetPost::Excerpt(100, true); ?>...</p>
