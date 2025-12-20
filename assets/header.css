@@ -47,9 +47,75 @@ html.is-changing #swup-loader {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     background-color: color-mix(in oklab, var(--color-base-100) 80%, transparent);
+    position: relative;
+    overflow: hidden;
 }
 
 .overlay-glass {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+}
+
+.header-glass>* {
+    position: relative;
+    z-index: 2;
+}
+
+.header-progress {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+.header-progress.active {
+    opacity: 1;
+}
+
+.header-progress__bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    border-radius: inherit;
+    background-color: color-mix(in oklab, var(--color-base-100) 80%, rgb(255, 255, 255) 15%);
+    opacity: 0.6;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: width 0.15s linear;
+}
+
+.header-title-text {
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    line-height: 1;
+}
+
+.header-title-text.is-swapping {
+    opacity: 0;
+    transform: translateY(0.2em);
+}
+
+.header-title-btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.header-title-text.is-overflowing {
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
 }

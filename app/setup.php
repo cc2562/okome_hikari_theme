@@ -1,5 +1,6 @@
 <?php
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+if (!defined('__TYPECHO_ROOT_DIR__'))
+    exit;
 /**
  * 主题设置
  * Html可以使用element组件
@@ -131,6 +132,7 @@ return [
                     '0.25rem' => '0.25rem',
                     '0.5rem' => '0.5rem',
                     '1rem' => '1rem',
+                    '1.5rem' => '1.5rem',
                     '2rem' => '2rem'
                 ]
             ],
