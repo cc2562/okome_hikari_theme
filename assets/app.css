@@ -8,7 +8,7 @@
  * npx @tailwindcss/cli -i ./assets/app.css -o ./assets/tailwindcss.css --watch
  */
 
-/* @import "tailwindcss"; */
+/*@import "tailwindcss";*/
 
 @plugin "daisyui";
 
