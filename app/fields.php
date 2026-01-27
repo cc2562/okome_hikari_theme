@@ -1,5 +1,6 @@
 <?php
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+if (!defined('__TYPECHO_ROOT_DIR__'))
+    exit;
 // 定义字段配置
 return [
     [
@@ -24,4 +25,16 @@ return [
             'style' => 'width: 100%;' // 自定义样式
         ]
     ],
+    [
+        'type' => 'Radio',
+        'name' => 'showTOC',
+        'value' => 'default',
+        'label' => '文章目录',
+        'description' => '控制本文目录显示。默认跟随全局设置。',
+        'options' => [
+            'default' => '默认',
+            'show' => '显示',
+            'hide' => '隐藏'
+        ]
+    ]
 ];

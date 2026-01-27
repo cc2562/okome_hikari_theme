@@ -178,6 +178,18 @@ return [
                 'value' => 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
                 'label' => '许可协议链接',
                 'description' => '许可协议的跳转链接'
+            ],
+            [
+                'type' => 'Radio',
+                'name' => 'enableTOC',
+                'value' => '1',
+                'label' => '开启文章目录',
+                'description' => '是否在文章页显示目录 (支持文章单独设置覆盖)',
+                'layout' => 'horizontal',
+                'options' => [
+                    '1' => '开启',
+                    '0' => '关闭'
+                ]
             ]
         ]
     ],
