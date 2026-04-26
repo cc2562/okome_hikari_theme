@@ -70,7 +70,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         <div class="card bg-info text-primary-content flex-1">
                             <div class="card-body h-full">
                                 <h2 class="card-title text-info-content"><?php get_site_name(); ?></h2>
-                                <p class="hidden sm:block"><?php Get::Options('sideBarDesc', true); ?></p>
+                                <p class="text-sm sm:text-base"><?php Get::Options('sideBarDesc', true); ?></p>
                             </div>
                         </div>
                     </div>
