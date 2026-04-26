@@ -40,6 +40,13 @@ return [
             ],
             [
                 'type' => 'Text',
+                'name' => 'bangumiPageLink',
+                'value' => '#',
+                'label' => '追番列表',
+                'description' => '追番列表页面链接'
+            ],
+            [
+                'type' => 'Text',
                 'name' => 'loadingImg',
                 'value' => get_assets('Emoji/bilibili/10002.png', false, false),
                 'label' => '加载背景图',
@@ -209,6 +216,32 @@ return [
                 'value' => '',
                 'label' => 'PJAX回调函数',
                 'description' => 'PJAX回调函数，用于在PJAX加载完成后执行'
+            ],
+        ]
+    ],
+    'Bangumi-Options' => [
+        'title' => '追番设置',
+        'fields' => [
+            [
+                'type' => 'Text',
+                'name' => 'bangumiUserId',
+                'value' => '',
+                'label' => 'Bangumi 用户名/UID',
+                'description' => '用于展示公开的正在追番列表'
+            ],
+            [
+                'type' => 'Text',
+                'name' => 'bangumiListTitle',
+                'value' => '正在追番',
+                'label' => '追番页标题',
+                'description' => '追番列表页面显示的标题'
+            ],
+            [
+                'type' => 'Text',
+                'name' => 'bangumiUserAgent',
+                'value' => 'okome-hikari/typecho-theme (https://github.com/cc2562/okome_hikari_theme)',
+                'label' => 'Bangumi User Agent',
+                'description' => '请求 Bangumi API 时使用，请填写可识别的项目名和项目主页'
             ],
         ]
     ],

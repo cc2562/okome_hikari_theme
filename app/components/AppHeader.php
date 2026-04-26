@@ -70,7 +70,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         <div class="card bg-info text-primary-content flex-1">
                             <div class="card-body h-full">
                                 <h2 class="card-title text-info-content"><?php get_site_name(); ?></h2>
-                                <p class="hidden sm:block"><?php Get::Options('sideBarDesc', true); ?></p>
+                                <p class="text-sm sm:text-base"><?php Get::Options('sideBarDesc', true); ?></p>
                             </div>
                         </div>
                     </div>
@@ -82,6 +82,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             </div>
                             <li><a href="<?php get_site_url(); ?>">首页</a></li>
                             <li><a href="<?php Get::Options('friends', true); ?>">友情链接</a></li>
+                            <?php $bangumiPageLink = trim((string) Get::Options('bangumiPageLink')); ?>
+                            <?php if ($bangumiPageLink !== '' && $bangumiPageLink !== '#'): ?>
+                                <li><a href="<?php echo htmlspecialchars($bangumiPageLink, ENT_QUOTES, 'UTF-8'); ?>">追番列表</a></li>
+                            <?php endif; ?>
                             <li><a href="<?php Get::Options('aboutLink', true); ?>">关于我</a></li>
                         </div>
                     </div>

@@ -13,6 +13,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 // 检查REST API是否启用
 $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '';
 $basePath = '/' . ltrim(__TTDF_RESTAPI_ROUTE__ ?? '', '/');
+
+if ($requestUri === $basePath . '/bangumi') {
+    require __DIR__ . '/../../app/pages/okome-hikari-api/bangumi.php';
+    exit;
+}
+
 $pathParts = explode('/', trim(str_replace($basePath, '', $requestUri), '/'));
 $endpoint = $pathParts[0] ?? '';
 
