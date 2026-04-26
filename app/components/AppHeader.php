@@ -82,6 +82,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             </div>
                             <li><a href="<?php get_site_url(); ?>">首页</a></li>
                             <li><a href="<?php Get::Options('friends', true); ?>">友情链接</a></li>
+                            <li><a href="<?php Get::Options('bangumiPageLink', true); ?>">追番列表</a></li>
                             <li><a href="<?php Get::Options('aboutLink', true); ?>">关于我</a></li>
                         </div>
                     </div>
