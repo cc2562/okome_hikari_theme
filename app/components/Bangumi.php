@@ -8,7 +8,8 @@ if ($bangumiTitle === '') {
 
 $bangumiUserId = trim((string) Get::Options('bangumiUserId'));
 $siteUrl = rtrim((string) get_site_url(false), '/');
-$bangumiApiUrl = $siteUrl . '/okome-hikari-api/bangumi';
+$bangumiRoute = defined('__TTDF_RESTAPI_ROUTE__') ? trim((string) __TTDF_RESTAPI_ROUTE__, '/') : 'hikari';
+$bangumiApiUrl = $siteUrl . '/' . $bangumiRoute . '/bangumi';
 ?>
 <main>
     <div class="mx-auto w-full max-w-full sm:max-w-5xl sm:px-4 flex flex-col gap-6">

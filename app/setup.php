@@ -239,7 +239,7 @@ return [
             [
                 'type' => 'Text',
                 'name' => 'bangumiUserAgent',
-                'value' => 'okome-hikari/typecho-theme (https://github.com/YuiNijika/okome_hikari)',
+                'value' => 'okome-hikari/typecho-theme (https://github.com/cc2562/okome_hikari_theme)',
                 'label' => 'Bangumi User Agent',
                 'description' => '请求 Bangumi API 时使用，请填写可识别的项目名和项目主页'
             ],
