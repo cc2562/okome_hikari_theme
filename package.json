@@ -7,7 +7,7 @@
     "daisyui": "^5.5.14"
   },
   "name": "okome_hikari",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "![稻曦（okome hikari）](screenshot.png)\r 一个基于 TTDF 框架构建的现代化 Typecho 主题，专注于简洁、流畅与可配置的体验。内置页面转场、动态配色系统、图片懒加载、代码高亮、评论增强与音乐播放器等功能，开箱即用，亦可按需扩展。",
   "main": "index.js",
   "scripts": {
